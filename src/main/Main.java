@@ -1,10 +1,12 @@
 package main;
 
+import funcion.Funcion;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//hola
+		Funcion s = new Funcion();
+		System.out.println(s.suma2(2));
 	}
 
 }
