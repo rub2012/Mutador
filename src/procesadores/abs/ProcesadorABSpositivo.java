@@ -6,19 +6,23 @@ import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtElement;
 
-public class ProcesadorABS extends AbstractProcessor<CtElement>{
+public class ProcesadorABSpositivo extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
 //		if (Helper.MatchAORbinary(candidate) || Helper.MatchAORunary(candidate)){
-//			candidate.getParent().setFactory(factory);
+//			candidate.getParent();
 //			CtBinaryOperator op = (CtBinaryOperator)candidate;
 //			op.setKind(BinaryOperatorKind.DIV);
 //		}
 //		else{
 //			return;
 //		}
-		
+//		
 	}
+//	
+//	private CtElement valorAbsoluto(CtElement aritmetico){
+//		return Math.abs(CtElement.class);
+//	}
 
 }
