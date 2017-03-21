@@ -10,7 +10,7 @@ public class ProcesadorAORBdivision extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchAORbinary(candidate)){
+		if (Helper.MatchAORbinary(candidate,BinaryOperatorKind.DIV)){
 			CtBinaryOperator op = (CtBinaryOperator)candidate;
 			op.setKind(BinaryOperatorKind.DIV);
 		}

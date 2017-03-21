@@ -10,7 +10,7 @@ public class ProcesadorAORBsuma extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchAORbinary(candidate)){
+		if (Helper.MatchAORbinary(candidate,BinaryOperatorKind.PLUS) ){
 			CtBinaryOperator op = (CtBinaryOperator)candidate;
 			op.setKind(BinaryOperatorKind.PLUS);
 		}

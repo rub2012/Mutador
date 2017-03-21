@@ -10,7 +10,7 @@ public class ProcesadorRORmenor extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchROR(candidate)){
+		if (Helper.MatchROR(candidate,BinaryOperatorKind.LT)){
 			CtBinaryOperator op = (CtBinaryOperator)candidate;
 			op.setKind(BinaryOperatorKind.LT);
 		}

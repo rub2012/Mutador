@@ -13,7 +13,7 @@ import spoon.reflect.declaration.CtElement;
 
 public class Helper {
 	
-	public static boolean MatchAORbinary(CtElement elemento){
+	public static boolean MatchAORbinary(CtElement elemento, BinaryOperatorKind tipo){
 		Set<BinaryOperatorKind> operadoresBin = new HashSet<>(Arrays.asList(BinaryOperatorKind.PLUS,
 																			BinaryOperatorKind.MINUS,
 																			BinaryOperatorKind.MUL,
@@ -22,7 +22,7 @@ public class Helper {
 		try
 		{
 			CtBinaryOperator op = (CtBinaryOperator)elemento;
-			return operadoresBin.contains(op);
+			return operadoresBin.contains(op.getKind()) && op.getKind() != tipo;
 		}
 		catch (Exception e) 
 		{
@@ -30,7 +30,7 @@ public class Helper {
 		}
 	}
 	
-	public static boolean MatchAORunary(CtElement elemento){
+	public static boolean MatchAORunary(CtElement elemento, UnaryOperatorKind tipo){
 		Set<UnaryOperatorKind> operadoresUn = new HashSet<>(Arrays.asList(UnaryOperatorKind.POSTDEC,
 																			UnaryOperatorKind.POSTINC,
 																			UnaryOperatorKind.PREDEC,
@@ -38,7 +38,7 @@ public class Helper {
 		try
 		{
 			CtUnaryOperator op = (CtUnaryOperator)elemento;
-			return operadoresUn.contains(op);
+			return operadoresUn.contains(op.getKind()) && op.getKind() != tipo;
 		}
 		catch (Exception e) 
 		{
@@ -46,7 +46,7 @@ public class Helper {
 		}
 	}
 	
-	public static boolean MatchCORbinary(CtElement elemento){
+	public static boolean MatchCORbinary(CtElement elemento, BinaryOperatorKind tipo){
 		Set<BinaryOperatorKind> operadoresBin = new HashSet<>(Arrays.asList(BinaryOperatorKind.AND,
 																			BinaryOperatorKind.OR,
 																			BinaryOperatorKind.BITAND,
@@ -55,7 +55,7 @@ public class Helper {
 		try
 		{
 			CtBinaryOperator op = (CtBinaryOperator)elemento;
-			return operadoresBin.contains(op);
+			return operadoresBin.contains(op.getKind()) && op.getKind() != tipo;
 		}
 		catch (Exception e) 
 		{
@@ -63,7 +63,7 @@ public class Helper {
 		}
 	}
 	
-	public static boolean MatchROR(CtElement elemento){
+	public static boolean MatchROR(CtElement elemento, BinaryOperatorKind tipo){
 		Set<BinaryOperatorKind> operadoresBin = new HashSet<>(Arrays.asList(BinaryOperatorKind.LE,
 																			BinaryOperatorKind.LT,
 																			BinaryOperatorKind.GE,
@@ -73,7 +73,7 @@ public class Helper {
 		try
 		{
 			CtBinaryOperator op = (CtBinaryOperator)elemento;
-			return operadoresBin.contains(op);
+			return operadoresBin.contains(op.getKind()) && op.getKind() != tipo;
 		}
 		catch (Exception e) 
 		{

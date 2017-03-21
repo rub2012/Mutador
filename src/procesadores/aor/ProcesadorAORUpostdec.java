@@ -10,7 +10,7 @@ public class ProcesadorAORUpostdec extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchAORunary(candidate)){
+		if (Helper.MatchAORunary(candidate,UnaryOperatorKind.POSTDEC)){
 			CtUnaryOperator op = (CtUnaryOperator)candidate;
 			op.setKind(UnaryOperatorKind.POSTDEC);
 		}

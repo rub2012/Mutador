@@ -10,7 +10,7 @@ public class ProcesadorCORoo extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchCORbinary(candidate)){
+		if (Helper.MatchCORbinary(candidate,BinaryOperatorKind.OR)){
 			CtBinaryOperator op = (CtBinaryOperator)candidate;
 			op.setKind(BinaryOperatorKind.OR);
 		}

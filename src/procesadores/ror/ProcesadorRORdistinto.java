@@ -10,7 +10,7 @@ public class ProcesadorRORdistinto extends AbstractProcessor<CtElement>{
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchROR(candidate)){
+		if (Helper.MatchROR(candidate,BinaryOperatorKind.NE)){
 			CtBinaryOperator op = (CtBinaryOperator)candidate;
 			op.setKind(BinaryOperatorKind.NE);
 		}
