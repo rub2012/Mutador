@@ -9,15 +9,14 @@ import spoon.reflect.declaration.CtElement;
 public class ProcesadorCORo extends AbstractProcessor<CtElement>{
 
 	@Override
+	public boolean isToBeProcessed(CtElement candidate){
+		return Helper.MatchCORbinary(candidate,BinaryOperatorKind.BITOR);
+	}
+
+	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchCORbinary(candidate,BinaryOperatorKind.BITOR)){
-			CtBinaryOperator op = (CtBinaryOperator)candidate;
-			op.setKind(BinaryOperatorKind.BITOR);
-		}
-		else{
-			return;
-		}
-		
+		CtBinaryOperator op = (CtBinaryOperator)candidate;
+		op.setKind(BinaryOperatorKind.BITOR);		
 	}
 
 }

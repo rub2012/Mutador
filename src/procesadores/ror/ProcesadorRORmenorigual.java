@@ -7,17 +7,16 @@ import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtElement;
 
 public class ProcesadorRORmenorigual extends AbstractProcessor<CtElement>{
+	
+	@Override
+	public boolean isToBeProcessed(CtElement candidate){
+		return Helper.MatchROR(candidate,BinaryOperatorKind.LE);
+	}
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchROR(candidate,BinaryOperatorKind.LE)){
-			CtBinaryOperator op = (CtBinaryOperator)candidate;
-			op.setKind(BinaryOperatorKind.LE);
-		}
-		else{
-			return;
-		}
-		
+		CtBinaryOperator op = (CtBinaryOperator)candidate;
+		op.setKind(BinaryOperatorKind.LE);		
 	}
 
 }

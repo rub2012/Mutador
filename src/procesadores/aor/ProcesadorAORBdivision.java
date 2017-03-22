@@ -7,17 +7,15 @@ import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.declaration.CtElement;
 
 public class ProcesadorAORBdivision extends AbstractProcessor<CtElement>{
+	
+	@Override
+	public boolean isToBeProcessed(CtElement candidate){
+		return Helper.MatchAORbinary(candidate,BinaryOperatorKind.DIV);
+	}
 
 	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchAORbinary(candidate,BinaryOperatorKind.DIV)){
-			CtBinaryOperator op = (CtBinaryOperator)candidate;
-			op.setKind(BinaryOperatorKind.DIV);
-		}
-		else{
-			return;
-		}
-		
+		CtBinaryOperator op = (CtBinaryOperator)candidate;
+		op.setKind(BinaryOperatorKind.DIV);		
 	}
-
 }

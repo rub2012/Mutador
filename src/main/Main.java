@@ -21,6 +21,7 @@ public class Main {
 		List<CtBinaryOperator<?>> elementos;
 		elementos = modelo.getElements(expresion);
 		CtBinaryOperator elem = elementos.get(0);
+		proc.isToBeProcessed(elem);
 		proc.process(elem);
 		
 		

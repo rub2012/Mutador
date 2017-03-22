@@ -9,15 +9,14 @@ import spoon.reflect.declaration.CtElement;
 public class ProcesadorAORUpreinc extends AbstractProcessor<CtElement>{
 
 	@Override
+	public boolean isToBeProcessed(CtElement candidate){
+		return Helper.MatchAORunary(candidate,UnaryOperatorKind.PREINC);
+	}
+
+	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchAORunary(candidate,UnaryOperatorKind.PREINC)){
-			CtUnaryOperator op = (CtUnaryOperator)candidate;
-			op.setKind(UnaryOperatorKind.PREINC);
-		}
-		else{
-			return;
-		}
-		
+		CtUnaryOperator op = (CtUnaryOperator)candidate;
+		op.setKind(UnaryOperatorKind.PREINC);		
 	}
 
 }

@@ -9,15 +9,14 @@ import spoon.reflect.declaration.CtElement;
 public class ProcesadorRORmayorigual extends AbstractProcessor<CtElement>{
 
 	@Override
+	public boolean isToBeProcessed(CtElement candidate){
+		return Helper.MatchROR(candidate,BinaryOperatorKind.GE);
+	}
+
+	@Override
 	public void process(CtElement candidate) {
-		if (Helper.MatchROR(candidate,BinaryOperatorKind.GE)){
-			CtBinaryOperator op = (CtBinaryOperator)candidate;
-			op.setKind(BinaryOperatorKind.GE);
-		}
-		else{
-			return;
-		}
-		
+		CtBinaryOperator op = (CtBinaryOperator)candidate;
+		op.setKind(BinaryOperatorKind.GE);		
 	}
 
 }
