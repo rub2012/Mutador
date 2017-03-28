@@ -18,5 +18,6 @@ public class ProcesadorAORBresta extends AbstractProcessor<CtElement>{
 		CtBinaryOperator op = (CtBinaryOperator)candidate;
 		op.setKind(BinaryOperatorKind.MINUS);		
 	}
+	
 
 }
