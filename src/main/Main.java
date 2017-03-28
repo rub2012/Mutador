@@ -6,6 +6,7 @@ import helpers.Helper;
 import procesadores.aor.ProcesadorAORB;
 import procesadores.aor.ProcesadorAORU;
 import procesadores.cor.ProcesadorCOR;
+import procesadores.ror.ProcesadorROR;
 import spoon.Launcher;
 import spoon.reflect.CtModel;
 import spoon.reflect.code.CtBinaryOperator;
@@ -41,7 +42,7 @@ public class Main {
 		cor.run();
 		//Filtro ROR
 		auxiliaresB = Helper.getROR(elementosB);
-		ProcesadorCOR ror = new ProcesadorCOR(launcher,auxiliaresB);
+		ProcesadorROR ror = new ProcesadorROR(launcher,auxiliaresB);
 		ror.run();
 	}
 

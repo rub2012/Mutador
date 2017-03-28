@@ -4,6 +4,7 @@ import java.util.List;
 
 import spoon.Launcher;
 import spoon.reflect.code.CtUnaryOperator;
+import spoon.reflect.code.UnaryOperatorKind;
 
 public class ProcesadorAORU {
 	
@@ -19,28 +20,39 @@ public class ProcesadorAORU {
 		ProcesadorAORUpostinc aorupostinc = new ProcesadorAORUpostinc();
 		ProcesadorAORUpredec aorupredec = new ProcesadorAORUpredec();
 		ProcesadorAORUpreinc aorupreinc = new ProcesadorAORUpreinc();
-		
+		UnaryOperatorKind aux;
+		int indice = 0;
 		for (CtUnaryOperator<?> elemento : auxiliares){
+			aux = elemento.getKind();
 			if (aorupostdec.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/postdec");
-				aorupostdec.process(elemento);
+				launcher.setSourceOutputDirectory("spooned/AOR/postdec"+indice);
+				//aorupostdec.process(elemento);
+				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
+				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/postinc");
-				aorupostinc.process(elemento);
+				launcher.setSourceOutputDirectory("spooned/AOR/postinc"+indice);
+				//aorupostinc.process(elemento);
+				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
+				elemento.setKind(aux);
 			}
 			if (aorupredec.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/predec");
-				aorupredec.process(elemento);
+				launcher.setSourceOutputDirectory("spooned/AOR/predec"+indice);
+				//aorupredec.process(elemento);
+				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
+				elemento.setKind(aux);
 			}
 			if (aorupreinc.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/preinc");
-				aorupreinc.process(elemento);
+				launcher.setSourceOutputDirectory("spooned/AOR/preinc"+indice);
+				//aorupreinc.process(elemento);
+				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();
-			}			
+				elemento.setKind(aux);
+			}
+			indice++;
 		}
 		
 	}

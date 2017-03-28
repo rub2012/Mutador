@@ -18,7 +18,7 @@ public class ProcesadorAORUpostdec extends AbstractProcessor<CtElement>{
 	@Override
 	public void process(CtElement candidate) {
 		CtUnaryOperator op = (CtUnaryOperator)candidate;
-		op.setKind(UnaryOperatorKind.POSTDEC);		
+		op.setKind(UnaryOperatorKind.POSTDEC);
 	}
 
 }
