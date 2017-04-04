@@ -2,9 +2,11 @@ package procesadores.aor;
 
 import java.util.List;
 
+import helpers.Helper;
 import spoon.Launcher;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
+import spoon.reflect.visitor.PrettyPrinter;
 
 public class ProcesadorAORU {
 	
@@ -29,6 +31,8 @@ public class ProcesadorAORU {
 				//aorupostdec.process(elemento);
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
+				String path = launcher.getModelBuilder().getSourceOutputDirectory() + "/funcion/Funcion.java";
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
