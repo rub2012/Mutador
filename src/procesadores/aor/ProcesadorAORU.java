@@ -24,36 +24,44 @@ public class ProcesadorAORU {
 		ProcesadorAORUpreinc aorupreinc = new ProcesadorAORUpreinc();
 		UnaryOperatorKind aux;
 		int indice = 0;
+		String path;
+		String pathCompile = "/funcion/Funcion.java";
 		for (CtUnaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (aorupostdec.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/postdec"+indice);
-				//aorupostdec.process(elemento);
+				path = "spooned/AOR/postdec"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
-				String path = launcher.getModelBuilder().getSourceOutputDirectory() + "/funcion/Funcion.java";
+				path += pathCompile;
 				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/postinc"+indice);
-				//aorupostinc.process(elemento);
+				path = "spooned/AOR/postinc"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorupredec.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/predec"+indice);
-				//aorupredec.process(elemento);
+				path = "spooned/AOR/predec"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorupreinc.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/preinc"+indice);
-				//aorupreinc.process(elemento);
+				path = "spooned/AOR/preinc"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			indice++;

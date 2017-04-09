@@ -2,6 +2,7 @@ package procesadores.ror;
 
 import java.util.List;
 
+import helpers.Helper;
 import spoon.Launcher;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -24,48 +25,62 @@ public class ProcesadorROR {
 		ProcesadorRORmenorigual rormenorigual = new ProcesadorRORmenorigual();
 		BinaryOperatorKind aux;
 		int indice = 0;
+		String path;
+		String pathCompile = "/funcion/Funcion.java";
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (rordistinto.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/distinto"+indice);
-				//rordistinto.process(elemento);
+				path = "spooned/ROR/distinto"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.NE);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (rorigual.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/igual"+indice);
-				//rorigual.process(elemento);
+				path = "spooned/ROR/igual"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.EQ);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (rormayor.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/mayor"+indice);
-				//rormayor.process(elemento);
+				path = "spooned/ROR/mayor"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GT);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (rormayorigual.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/mayorigual"+indice);
-				//rormayorigual.process(elemento);
+				path = "spooned/ROR/mayorigual"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GE);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (rormenor.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/menor"+indice);
-				//rormenor.process(elemento);
+				path = "spooned/ROR/menor"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LT);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (rormenorigual.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/ROR/menorigual"+indice);
-				//rormenorigual.process(elemento);
+				path = "spooned/ROR/menorigual"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LE);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			indice++;

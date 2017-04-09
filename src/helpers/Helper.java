@@ -1,5 +1,6 @@
 package helpers;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,6 +9,10 @@ import java.util.Set;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -153,5 +158,29 @@ public class Helper {
 	public static void compilar(String path){
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		compiler.run(null, null, null, path);
+	}
+	
+	public static void limpiarDirectorio(File directory){
+		if(directory.exists()){
+	        File[] files = directory.listFiles();
+	        if(null!=files){
+	            for(int i=0; i<files.length; i++) {
+	                if(files[i].isDirectory()) {
+	                	limpiarDirectorio(files[i]);
+	                }
+	                else {
+	                    files[i].delete();
+	                }
+	            }
+	        }
+	        directory.delete();
+	    }
+	}
+	
+	public static void runTests(Class test){
+	    Result result = JUnitCore.runClasses(test);
+	    for (Failure failure : result.getFailures()){
+	        System.out.println(failure.toString());
+	    }
 	}
 }

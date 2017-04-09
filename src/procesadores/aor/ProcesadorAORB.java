@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.jdt.internal.compiler.ast.BinaryExpression;
 
+import helpers.Helper;
 import spoon.Launcher;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -27,41 +28,53 @@ public class ProcesadorAORB {
 		ProcesadorAORBmodulo aorbmodulo = new ProcesadorAORBmodulo();
 		BinaryOperatorKind aux;
 		int indice = 0;
+		String path;
+		String pathCompile = "/funcion/Funcion.java";
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (aorbsuma.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/suma"+indice);
-				//aorbsuma.process(elemento.clone());
+				path = "spooned/AOR/suma"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.PLUS);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorbresta.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/resta"+indice);
-				//aorbresta.process(elemento.clone());
+				path = "spooned/AOR/resta"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MINUS);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorbdivision.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/division"+indice);
-				//aorbdivision.process(elemento.clone());
+				path = "spooned/AOR/division"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.DIV);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorbmultiplicacion.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/multiplicacion"+indice);
-				//aorbmultiplicacion.process(elemento.clone());
+				path = "spooned/AOR/multiplicacion"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MUL);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			if (aorbmodulo.isToBeProcessed(elemento)){
-				launcher.setSourceOutputDirectory("spooned/AOR/modulo"+indice);
-				//aorbmodulo.process(elemento.clone());
+				path = "spooned/AOR/modulo"+indice;
+				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MOD);
 				launcher.prettyprint();
+				path += pathCompile;
+				Helper.compilar(path);
 				elemento.setKind(aux);
 			}
 			indice++;

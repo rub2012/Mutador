@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.util.List;
 
 import helpers.Helper;
@@ -12,10 +13,13 @@ import spoon.reflect.CtModel;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.visitor.filter.TypeFilter;
+import test.TestMutar;
 
 public class Main {
 
 	public static void main(String[] args) {
+		File carpeta = new File("spooned");
+		Helper.limpiarDirectorio(carpeta);
 		Launcher launcher = new Launcher();
 		launcher.addInputResource("src/funcion/Funcion.java");
 		TypeFilter<CtBinaryOperator<?>> expresionB = new TypeFilter<CtBinaryOperator<?>>(CtBinaryOperator.class);
@@ -44,6 +48,8 @@ public class Main {
 		auxiliaresB = Helper.getROR(elementosB);
 		ProcesadorROR ror = new ProcesadorROR(launcher,auxiliaresB);
 		ror.run();
+		
+		Helper.runTests(TestMutar.class);
 	}
 
 }
