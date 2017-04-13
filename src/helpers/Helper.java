@@ -20,6 +20,7 @@ import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtElement;
+import tmp.Pepe;
 
 public class Helper {
 	
@@ -182,5 +183,16 @@ public class Helper {
 	    for (Failure failure : result.getFailures()){
 	        System.out.println(failure.toString());
 	    }
+	}
+	
+	public static void cambiarContexto(String url){
+		ClassLoader parentClassLoader = MutadorClassLoader.class.getClassLoader();
+		MutadorClassLoader classLoader = new MutadorClassLoader(parentClassLoader,url);
+	    try {
+			Class myObjectClass = classLoader.loadClass("tmp.Pepe");
+		} catch (ClassNotFoundException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

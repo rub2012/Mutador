@@ -1,6 +1,8 @@
 package main;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.util.List;
 
 import helpers.Helper;
@@ -48,6 +50,18 @@ public class Main {
 		auxiliaresB = Helper.getROR(elementosB);
 		ProcesadorROR ror = new ProcesadorROR(launcher,auxiliaresB);
 		ror.run();
+		
+		Helper.runTests(TestMutar.class);
+		String a = "spooned/AOR/resta0/funcion/Funcion.class";
+		URI s = new File(a).toURI();
+		try {
+			s.toURL().toString();
+			Helper.cambiarContexto(s.toURL().toString());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//s.get
 		
 		Helper.runTests(TestMutar.class);
 	}

@@ -1,7 +1,6 @@
 package test;
 
 import funcion.Funcion;
-import org.junit.runner.JUnitCore;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -36,6 +35,7 @@ public class TestMutar extends TestCase {
 		public void testMutante2() {
 			int resultado = funcion.suma2(valorInput);
 			assertEquals(valorInput + 2, resultado);
+			System.out.println("Resultado Suma 2 = " + resultado);
 		}
 		
 		public void testMutante3() {
