@@ -186,13 +186,12 @@ public class Helper {
 	}
 	
 	public static void cambiarContexto(String url){
-		ClassLoader parentClassLoader = MutadorClassLoader.class.getClassLoader();
-		MutadorClassLoader classLoader = new MutadorClassLoader(parentClassLoader,url);
-	    try {
-			Class myObjectClass = classLoader.loadClass("tmp.Pepe");
-		} catch (ClassNotFoundException  e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		MutadorClassLoader classLoader = new MutadorClassLoader(url);
+//	    try {
+//			Class myObjectClass = classLoader.loadClass("tmp.Pepe");
+//		} catch (ClassNotFoundException  e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }
