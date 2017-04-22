@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.jdt.internal.compiler.ast.BinaryExpression;
 
 import helpers.Helper;
+import main.Main;
 import spoon.Launcher;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -29,7 +30,6 @@ public class ProcesadorAORB {
 		BinaryOperatorKind aux;
 		int indice = 0;
 		String path;
-		String pathCompile = "/funcion/Funcion.java";
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (aorbsuma.isToBeProcessed(elemento)){
@@ -37,8 +37,8 @@ public class ProcesadorAORB {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.PLUS);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbresta.isToBeProcessed(elemento)){
@@ -46,8 +46,8 @@ public class ProcesadorAORB {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MINUS);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbdivision.isToBeProcessed(elemento)){
@@ -55,8 +55,8 @@ public class ProcesadorAORB {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.DIV);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbmultiplicacion.isToBeProcessed(elemento)){
@@ -64,8 +64,8 @@ public class ProcesadorAORB {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MUL);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbmodulo.isToBeProcessed(elemento)){
@@ -73,8 +73,8 @@ public class ProcesadorAORB {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MOD);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

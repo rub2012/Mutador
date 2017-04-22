@@ -3,6 +3,7 @@ package procesadores.cor;
 import java.util.List;
 
 import helpers.Helper;
+import main.Main;
 import spoon.Launcher;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -25,7 +26,6 @@ public class ProcesadorCOR {
 		BinaryOperatorKind aux;
 		int indice = 0;
 		String path;
-		String pathCompile = "/funcion/Funcion.java";
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (cory.isToBeProcessed(elemento)){
@@ -33,8 +33,8 @@ public class ProcesadorCOR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITAND);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coryy.isToBeProcessed(elemento)){
@@ -42,8 +42,8 @@ public class ProcesadorCOR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.AND);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coro.isToBeProcessed(elemento)){
@@ -51,8 +51,8 @@ public class ProcesadorCOR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITOR);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coroo.isToBeProcessed(elemento)){
@@ -60,8 +60,8 @@ public class ProcesadorCOR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.OR);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (corxor.isToBeProcessed(elemento)){
@@ -69,8 +69,8 @@ public class ProcesadorCOR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITXOR);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

@@ -1,8 +1,6 @@
 package main;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.util.List;
 
 import helpers.Helper;
@@ -15,13 +13,19 @@ import spoon.reflect.CtModel;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.visitor.filter.TypeFilter;
-import test.TestMutar;
 
 public class Main {
-
-	public static void main(String[] args) {
+	
+	public static String classPath,pathCompile,pathCompiled;
+	public static int mutantesTotales,mutantesPass;
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+		classPath = "funcion.Funcion";
+		pathCompile = "/funcion/Funcion.java";
+		pathCompiled = "/funcion/Funcion.class";
 		File carpeta = new File("spooned");
 		Helper.limpiarDirectorio(carpeta);
+		File log = new File("Log.txt");
+		Helper.limpiarDirectorio(log);
 		Launcher launcher = new Launcher();
 		launcher.addInputResource("src/funcion/Funcion.java");
 		TypeFilter<CtBinaryOperator<?>> expresionB = new TypeFilter<CtBinaryOperator<?>>(CtBinaryOperator.class);
@@ -51,19 +55,7 @@ public class Main {
 		ProcesadorROR ror = new ProcesadorROR(launcher,auxiliaresB);
 		ror.run();
 		
-		Helper.runTests(TestMutar.class);
-		String a = "spooned/AOR/resta0/funcion/Funcion.class";
-		URI s = new File(a).toURI();
-		try {
-			s.toURL().toString();
-			Helper.cambiarContexto(s.toURL().toString());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//s.get
-		
-		Helper.runTests(TestMutar.class);
+		Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}
 
 }

@@ -3,6 +3,7 @@ package procesadores.aor;
 import java.util.List;
 
 import helpers.Helper;
+import main.Main;
 import spoon.Launcher;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
@@ -25,7 +26,6 @@ public class ProcesadorAORU {
 		UnaryOperatorKind aux;
 		int indice = 0;
 		String path;
-		String pathCompile = "/funcion/Funcion.java";
 		for (CtUnaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (aorupostdec.isToBeProcessed(elemento)){
@@ -33,8 +33,8 @@ public class ProcesadorAORU {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
@@ -42,8 +42,8 @@ public class ProcesadorAORU {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupredec.isToBeProcessed(elemento)){
@@ -51,8 +51,8 @@ public class ProcesadorAORU {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupreinc.isToBeProcessed(elemento)){
@@ -60,8 +60,8 @@ public class ProcesadorAORU {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

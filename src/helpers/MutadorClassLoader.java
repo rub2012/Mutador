@@ -6,15 +6,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 
-import tmp.Pepe;
 
 public class MutadorClassLoader extends ClassLoader {
 	
 	private File prepath;
+	private String classPath;
 	
-	public MutadorClassLoader(File prepath) {
+	public MutadorClassLoader(File prepath, String classPath) {
         super();
         this.prepath = prepath;
+        this.classPath = classPath;
     }
 	
 	@Override
@@ -27,7 +28,7 @@ public class MutadorClassLoader extends ClassLoader {
     @Override
     public Class<?> findClass(String s) {
         try {
-        	if(!"tmp.Pepe".equals(s)){
+        	if(!classPath.equals(s)){
         		return super.loadClass(s);
         	}
         	byte[] bytes = new byte[(int) prepath.length()];

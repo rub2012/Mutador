@@ -3,6 +3,7 @@ package procesadores.ror;
 import java.util.List;
 
 import helpers.Helper;
+import main.Main;
 import spoon.Launcher;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -26,7 +27,6 @@ public class ProcesadorROR {
 		BinaryOperatorKind aux;
 		int indice = 0;
 		String path;
-		String pathCompile = "/funcion/Funcion.java";
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (rordistinto.isToBeProcessed(elemento)){
@@ -34,8 +34,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.NE);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rorigual.isToBeProcessed(elemento)){
@@ -43,8 +43,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.EQ);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormayor.isToBeProcessed(elemento)){
@@ -52,8 +52,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GT);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormayorigual.isToBeProcessed(elemento)){
@@ -61,8 +61,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GE);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormenor.isToBeProcessed(elemento)){
@@ -70,8 +70,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LT);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormenorigual.isToBeProcessed(elemento)){
@@ -79,8 +79,8 @@ public class ProcesadorROR {
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LE);
 				launcher.prettyprint();
-				path += pathCompile;
-				Helper.compilar(path);
+				Helper.compilar(path + Main.pathCompile);
+				Helper.runTests(path + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

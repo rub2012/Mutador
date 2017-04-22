@@ -1,16 +1,20 @@
 package test;
 
-import funcion.Funcion;
+import Interfaces.IFuncion;
+import helpers.Helper;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class TestMutar extends TestCase {
 
-		Funcion funcion;
+		IFuncion funcion;
 		int valorInput;
 		boolean a,b;
 
+		
+		
+		
 		public TestMutar( String testName ) {
 		    super( testName );
 		}
@@ -20,7 +24,7 @@ public class TestMutar extends TestCase {
 		}
 		
 		public void  setUp() {
-				funcion = new Funcion();
+				funcion = Helper.getInstancia();
 				valorInput = 2;
 				a = true;
 				b = true;
@@ -35,7 +39,6 @@ public class TestMutar extends TestCase {
 		public void testMutante2() {
 			int resultado = funcion.suma2(valorInput);
 			assertEquals(valorInput + 2, resultado);
-			System.out.println("Resultado Suma 2 = " + resultado);
 		}
 		
 		public void testMutante3() {
