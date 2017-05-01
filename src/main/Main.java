@@ -23,7 +23,9 @@ public class Main {
 		pathCompile = "/funcion/Funcion.java";
 		pathCompiled = "/funcion/Funcion.class";
 		File carpeta = new File("spooned");
+		File mutantes = new File("mutantes");
 		Helper.limpiarDirectorio(carpeta);
+		Helper.limpiarDirectorio(mutantes);
 		File log = new File("Log.txt");
 		Helper.limpiarDirectorio(log);
 		Launcher launcher = new Launcher();

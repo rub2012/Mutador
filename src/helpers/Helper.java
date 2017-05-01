@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.tools.JavaCompiler;
+import javax.tools.JavaCompiler.CompilationTask;
+import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import org.junit.runner.JUnitCore;
@@ -162,8 +166,22 @@ public class Helper {
 	}
 	
 	public static void compilar(String path){
-		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-		compiler.run(null, null, null, path);
+		
+		try {
+			Main.mutantesTotales++;
+			Path currentRelativePath = Paths.get("");
+			String currentPath = currentRelativePath.toAbsolutePath().toString();
+			String directorio = currentPath + File.separator + "mutantes" + File.separator + Main.mutantesTotales;
+			new File(directorio).mkdirs();			
+			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+			StandardJavaFileManager sjfm = compiler.getStandardFileManager(null, null, null);
+			String[] options = new String[] { "-d", directorio };
+			File[] javaFiles = new File[] { new File(path) };
+			CompilationTask compilationTask = compiler.getTask(null, null, null, Arrays.asList(options), null,sjfm.getJavaFileObjects(javaFiles));
+			compilationTask.call();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void limpiarDirectorio(File directory){
@@ -186,7 +204,6 @@ public class Helper {
 	public static void runTests(String pathCompiled){
 		File file = new File(pathCompiled);
 		Helper.setInstancia(file,Main.classPath);
-		Main.mutantesTotales++;
 	    Result result = JUnitCore.runClasses(TestMutar.class);
 	    if (result.getFailureCount() == 0){
 	    	Main.mutantesPass++;

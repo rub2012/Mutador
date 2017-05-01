@@ -34,7 +34,7 @@ public class ProcesadorCOR {
 				elemento.setKind(BinaryOperatorKind.BITAND);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coryy.isToBeProcessed(elemento)){
@@ -43,7 +43,7 @@ public class ProcesadorCOR {
 				elemento.setKind(BinaryOperatorKind.AND);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coro.isToBeProcessed(elemento)){
@@ -52,7 +52,7 @@ public class ProcesadorCOR {
 				elemento.setKind(BinaryOperatorKind.BITOR);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coroo.isToBeProcessed(elemento)){
@@ -61,7 +61,7 @@ public class ProcesadorCOR {
 				elemento.setKind(BinaryOperatorKind.OR);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (corxor.isToBeProcessed(elemento)){
@@ -70,7 +70,7 @@ public class ProcesadorCOR {
 				elemento.setKind(BinaryOperatorKind.BITXOR);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

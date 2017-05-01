@@ -35,7 +35,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.NE);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rorigual.isToBeProcessed(elemento)){
@@ -44,7 +44,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.EQ);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormayor.isToBeProcessed(elemento)){
@@ -53,7 +53,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.GT);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormayorigual.isToBeProcessed(elemento)){
@@ -62,7 +62,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.GE);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormenor.isToBeProcessed(elemento)){
@@ -71,7 +71,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.LT);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (rormenorigual.isToBeProcessed(elemento)){
@@ -80,7 +80,7 @@ public class ProcesadorROR {
 				elemento.setKind(BinaryOperatorKind.LE);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests(path + Main.pathCompiled);
+				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;
