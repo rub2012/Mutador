@@ -29,7 +29,7 @@ import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtElement;
-import test.TestMutar;
+import test.MutarTest;
 
 public class Helper {
 	private static IFuncion funcion;
@@ -204,7 +204,7 @@ public class Helper {
 	public static void runTests(String pathCompiled){
 		File file = new File(pathCompiled);
 		Helper.setInstancia(file,Main.classPath);
-	    Result result = JUnitCore.runClasses(TestMutar.class);
+	    Result result = JUnitCore.runClasses(MutarTest.class);
 	    if (result.getFailureCount() == 0){
 	    	Main.mutantesPass++;
 	    	registrarMutante(pathCompiled);
