@@ -34,7 +34,7 @@ public class ProcesadorAORU {
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
@@ -43,7 +43,7 @@ public class ProcesadorAORU {
 				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupredec.isToBeProcessed(elemento)){
@@ -52,7 +52,7 @@ public class ProcesadorAORU {
 				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupreinc.isToBeProcessed(elemento)){
@@ -61,7 +61,7 @@ public class ProcesadorAORU {
 				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;

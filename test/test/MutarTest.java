@@ -1,9 +1,6 @@
 package test;
 
-import Interfaces.IFuncion;
 import funcion.Funcion;
-import helpers.Helper;
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;

@@ -12,9 +12,9 @@ public class CustomListener extends RunListener {
 	}
 	
 	@Override
-	public void testStarted(Description description){
+	public void testFinished(Description description){
 		System.out.println(description.getMethodName());
-		//description.
+		//description.createSuiteDescription(testClass)
 	}
 
 }

@@ -20,9 +20,6 @@ import javax.tools.ToolProvider;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-
-import Interfaces.IFuncion;
 import main.Main;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
@@ -32,7 +29,6 @@ import spoon.reflect.declaration.CtElement;
 import test.MutarTest;
 
 public class Helper {
-	private static IFuncion funcion;
 	public static boolean MatchAORbinary(CtElement elemento, BinaryOperatorKind tipo){
 		Set<BinaryOperatorKind> operadoresBin = new HashSet<>(Arrays.asList(BinaryOperatorKind.PLUS,
 																			BinaryOperatorKind.MINUS,
@@ -203,7 +199,7 @@ public class Helper {
 	
 	public static void runTests(String pathCompiled){
 		File file = new File(pathCompiled);
-		Helper.setInstancia(file,Main.classPath);
+		//Helper.setInstancia(file,Main.classPath);
 	    Result result = JUnitCore.runClasses(MutarTest.class);
 	    if (result.getFailureCount() == 0){
 	    	Main.mutantesPass++;
@@ -213,20 +209,7 @@ public class Helper {
 //	        System.out.println(failure.toString());
 //	    }
 	}
-	
-	public static IFuncion getInstancia(){
-		return funcion;
-	}
-	
-	public static void setInstancia(File file, String classPath){
-		MutadorClassLoader loader = new MutadorClassLoader(file.getAbsoluteFile(),classPath);
-		try {
-			funcion =  (IFuncion) loader.loadClass(classPath).newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
-	
+		
 	public static void registrarMutante(String path){
 		Writer output;
 		try {

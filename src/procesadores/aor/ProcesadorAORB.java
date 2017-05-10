@@ -38,7 +38,7 @@ public class ProcesadorAORB {
 				elemento.setKind(BinaryOperatorKind.PLUS);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbresta.isToBeProcessed(elemento)){
@@ -48,7 +48,7 @@ public class ProcesadorAORB {
 				//System.out.println(elemento.getPosition().getLine());//linea
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbdivision.isToBeProcessed(elemento)){
@@ -57,7 +57,7 @@ public class ProcesadorAORB {
 				elemento.setKind(BinaryOperatorKind.DIV);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbmultiplicacion.isToBeProcessed(elemento)){
@@ -66,7 +66,7 @@ public class ProcesadorAORB {
 				elemento.setKind(BinaryOperatorKind.MUL);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorbmodulo.isToBeProcessed(elemento)){
@@ -75,7 +75,7 @@ public class ProcesadorAORB {
 				elemento.setKind(BinaryOperatorKind.MOD);
 				launcher.prettyprint();
 				Helper.compilar(path + Main.pathCompile);
-				Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
+				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			indice++;
