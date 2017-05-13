@@ -2,12 +2,10 @@ package procesadores.aor;
 
 import java.util.List;
 
-import helpers.Helper;
 import main.Main;
 import spoon.Launcher;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
-import spoon.reflect.visitor.PrettyPrinter;
 
 public class ProcesadorAORU {
 	
@@ -24,47 +22,41 @@ public class ProcesadorAORU {
 		ProcesadorAORUpredec aorupredec = new ProcesadorAORUpredec();
 		ProcesadorAORUpreinc aorupreinc = new ProcesadorAORUpreinc();
 		UnaryOperatorKind aux;
-		int indice = 0;
 		String path;
 		for (CtUnaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (aorupostdec.isToBeProcessed(elemento)){
-				path = "spooned/AOR/postdec"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupostinc.isToBeProcessed(elemento)){
-				path = "spooned/AOR/postinc"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupredec.isToBeProcessed(elemento)){
-				path = "spooned/AOR/predec"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (aorupreinc.isToBeProcessed(elemento)){
-				path = "spooned/AOR/preinc"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
-			indice++;
 		}
 		
 	}

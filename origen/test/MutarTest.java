@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class MutarTest {
 
-		//IFuncion funcion;
 		Funcion funcion;
 		int valorInput;
 		boolean a,b;		

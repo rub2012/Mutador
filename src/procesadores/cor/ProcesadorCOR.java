@@ -24,56 +24,49 @@ public class ProcesadorCOR {
 		ProcesadorCORoo coroo = new ProcesadorCORoo();
 		ProcesadorCORxor corxor = new ProcesadorCORxor();
 		BinaryOperatorKind aux;
-		int indice = 0;
 		String path;
 		for (CtBinaryOperator<?> elemento : auxiliares){
 			aux = elemento.getKind();
 			if (cory.isToBeProcessed(elemento)){
-				path = "spooned/COR/y"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITAND);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coryy.isToBeProcessed(elemento)){
-				path = "spooned/COR/yy"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.AND);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coro.isToBeProcessed(elemento)){
-				path = "spooned/COR/o"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITOR);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (coroo.isToBeProcessed(elemento)){
-				path = "spooned/COR/oo"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.OR);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
 			if (corxor.isToBeProcessed(elemento)){
-				path = "spooned/COR/xor"+indice;
+				Main.mutantesTotales++;
+				path = Main.mutantesRoot+Main.mutantesTotales;
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITXOR);
 				launcher.prettyprint();
-				Helper.compilar(path + Main.pathCompile);
-				//Helper.runTests("mutantes/"+ Main.mutantesTotales + Main.pathCompiled);
 				elemento.setKind(aux);
 			}
-			indice++;
 		}
 		
 	}

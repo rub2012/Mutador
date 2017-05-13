@@ -6,8 +6,10 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import main.Main;
 
 import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 public class TestearMutantes {
 
@@ -58,6 +60,21 @@ public class TestearMutantes {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void runTest(){
+		for(int i = 1 ; i < Main.mutantesTotales + 1 ; i++){
+			Helper.compilar(File.separator + Main.mutantesRoot + i + File.separator + Main.pathCompile, Main.mutanteBinDir);
+			setearLoader();
+			try {
+				Class<?> test = loader.loadClass(Main.testclassPath);
+				Result resultado = junit.run(test);
+				System.out.println(resultado.getFailureCount());
+				
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

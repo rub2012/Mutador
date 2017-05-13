@@ -18,15 +18,11 @@ import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import main.Main;
 import spoon.reflect.code.BinaryOperatorKind;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.UnaryOperatorKind;
 import spoon.reflect.declaration.CtElement;
-import test.MutarTest;
 
 public class Helper {
 	public static boolean MatchAORbinary(CtElement elemento, BinaryOperatorKind tipo){
@@ -161,17 +157,15 @@ public class Helper {
 		return ror;
 	}
 	
-	public static void compilar(String path){
-		
+	public static void compilar(String path,String directorio){		
 		try {
-			Main.mutantesTotales++;
 			Path currentRelativePath = Paths.get("");
-			String currentPath = currentRelativePath.toAbsolutePath().toString();
-			String directorio = currentPath + File.separator + "mutantes" + File.separator + Main.mutantesTotales;
-			new File(directorio).mkdirs();			
+			String currentPath = currentRelativePath.toAbsolutePath().toString() + File.separator + directorio;
+			File f = new File(currentPath);
+			f.mkdirs();			
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 			StandardJavaFileManager sjfm = compiler.getStandardFileManager(null, null, null);
-			String[] options = new String[] { "-d", directorio };
+			String[] options = new String[] { "-classpath", "origen;" + System.getProperty("java.class.path") , "-d", currentPath };
 			File[] javaFiles = new File[] { new File(path) };
 			CompilationTask compilationTask = compiler.getTask(null, null, null, Arrays.asList(options), null,sjfm.getJavaFileObjects(javaFiles));
 			compilationTask.call();
@@ -197,18 +191,18 @@ public class Helper {
 	    }
 	}
 	
-	public static void runTests(String pathCompiled){
-		File file = new File(pathCompiled);
-		//Helper.setInstancia(file,Main.classPath);
-	    Result result = JUnitCore.runClasses(MutarTest.class);
-	    if (result.getFailureCount() == 0){
-	    	Main.mutantesPass++;
-	    	registrarMutante(pathCompiled);
-	    }
-//	    for (Failure failure : result.getFailures()){
-//	        System.out.println(failure.toString());
+//	public static void runTests(String pathCompiled){
+//		File file = new File(pathCompiled);
+//		//Helper.setInstancia(file,Main.classPath);
+//	    Result result = JUnitCore.runClasses(MutarTest.class);
+//	    if (result.getFailureCount() == 0){
+//	    	Main.mutantesPass++;
+//	    	registrarMutante(pathCompiled);
 //	    }
-	}
+////	    for (Failure failure : result.getFailures()){
+////	        System.out.println(failure.toString());
+////	    }
+//	}
 		
 	public static void registrarMutante(String path){
 		Writer output;
