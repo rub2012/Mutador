@@ -39,26 +39,20 @@ public class TestearMutantes {
 	public void registrarTestPorMutante(String pathTest, String pathClase) {
 		setearLoader();
 		try {
-			Class<?> classDataSaver = loader.loadClass(pathClase);
-			Method method = classDataSaver.getMethod("getInstance");
-			method.setAccessible(true);
-			Object classDataSaverInstance = method.invoke(classDataSaver, null);
-			Class<?> clsInstance = classDataSaverInstance.getClass();
-			CustomListener listener = new CustomListener(clsInstance);
+//			Class<?> classDataSaver = loader.loadClass(pathClase);
+//			Method method = classDataSaver.getMethod("getInstance");
+//			method.setAccessible(true);
+//			Object classDataSaverInstance = method.invoke(classDataSaver, null);
+//			Class<?> clsInstance = classDataSaverInstance.getClass();
+			CustomListener listener = new CustomListener(null);
 			junit.addListener(listener);
 			Class<?> classTest = loader.loadClass(pathTest);
 			junit.run(classTest);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}

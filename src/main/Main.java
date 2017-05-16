@@ -25,7 +25,7 @@ public class Main {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		
 		mutantesRoot = "mutantes"+ File.separator +"source" + File.separator;
-		mutanteBinDir = "mutantes" + File.separator + "bin"; // .class del test y mutante a testear
+		mutanteBinDir = "mutantes" + File.separator + "bin" + File.separator; // .class del test y mutante a testear
 		pathCompile = "funcion" + File.separator + "Funcion.java";
 		pathTestSource = "origen"+ File.separator +"test"+ File.separator +"MutarTest.java";
 		pathFuncSource = "origen"+ File.separator +"funcion"+ File.separator +"Funcion.java";
@@ -67,6 +67,7 @@ public class Main {
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
 		mut.runTest();
+		//mut.registrarTestPorMutante(Main.testclassPath,"funcion.Funcion");
 		
 		Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}

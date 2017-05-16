@@ -15,6 +15,7 @@ public class CustomListener extends RunListener {
 	public void testFinished(Description description){
 		System.out.println(description.getMethodName());
 		//description.createSuiteDescription(testClass)
+		//description.
 	}
 
 }

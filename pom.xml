@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Mutador</groupId>
   <artifactId>Mutador</artifactId>
-  <version>1-retail</version>
+  <version>1</version>
   <name>Mutador</name>
   <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
@@ -24,6 +24,12 @@
 	    <groupId>fr.inria.gforge.spoon</groupId>
 	    <artifactId>spoon-core</artifactId>
 	    <version>5.6.0</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.jacoco</groupId>
+	    <artifactId>org.jacoco.core</artifactId>
+	    <version>0.7.9</version>
 	</dependency>
 
   </dependencies>
