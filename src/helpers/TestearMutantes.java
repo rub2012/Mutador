@@ -65,7 +65,7 @@ public class TestearMutantes {
 	
 	public void runTest(){
 		for(int i = 1 ; i < Main.mutantesTotales + 1 ; i++){
-			Helper.compilar(File.separator + Main.mutantesRoot + i + File.separator + Main.pathCompile, Main.mutanteBinDir);
+			Helper.compilar(Main.mutantesRoot + i + File.separator + Main.pathCompile, Main.mutanteBinDir);
 			setearLoader();
 			try {
 				Class<?> test = loader.loadClass(Main.testclassPath);

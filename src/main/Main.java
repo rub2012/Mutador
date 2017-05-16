@@ -24,11 +24,11 @@ public class Main {
 	public static int mutantesTotales,mutantesPass;
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		
-		mutantesRoot = "mutantes/source/";
-		mutanteBinDir = "mutantes/bin"; // .class del test y mutante a testear
-		pathCompile = "funcion/Funcion.java";
-		pathTestSource = "origen/test/MutarTest.java";
-		pathFuncSource = "origen/funcion/Funcion.java";
+		mutantesRoot = "mutantes"+ File.separator +"source" + File.separator;
+		mutanteBinDir = "mutantes" + File.separator + "bin"; // .class del test y mutante a testear
+		pathCompile = "funcion" + File.separator + "Funcion.java";
+		pathTestSource = "origen"+ File.separator +"test"+ File.separator +"MutarTest.java";
+		pathFuncSource = "origen"+ File.separator +"funcion"+ File.separator +"Funcion.java";
 		testclassPath = "test.MutarTest";
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
