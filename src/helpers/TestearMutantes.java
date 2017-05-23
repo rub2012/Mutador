@@ -1,6 +1,8 @@
 package helpers;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -8,6 +10,18 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import main.Main;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.jacoco.core.analysis.Analyzer;
+import org.jacoco.core.analysis.CoverageBuilder;
+import org.jacoco.core.analysis.IClassCoverage;
+import org.jacoco.core.analysis.ICounter;
+import org.jacoco.core.data.ExecutionDataStore;
+import org.jacoco.core.data.SessionInfoStore;
+import org.jacoco.core.instr.Instrumenter;
+import org.jacoco.core.runtime.IRuntime;
+import org.jacoco.core.runtime.LoggerRuntime;
+import org.jacoco.core.runtime.RuntimeData;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
@@ -44,15 +58,71 @@ public class TestearMutantes {
 //			method.setAccessible(true);
 //			Object classDataSaverInstance = method.invoke(classDataSaver, null);
 //			Class<?> clsInstance = classDataSaverInstance.getClass();
+			
+			
+			// For instrumentation and runtime we need a IRuntime instance
+			// to collect execution data:
+			final IRuntime runtime = new LoggerRuntime();
+
+			// The Instrumenter creates a modified version of our test target class
+			// that contains additional probes for execution data recording:
+			InputStream claseOriginal = loader.getResourceAsStream(getPath(Main.targetclassPath));
+			final Instrumenter instr = new Instrumenter(runtime);
+			final byte[] instrumented = instr.instrument(claseOriginal, Main.targetclassPath);
+			
+			//sobrescribo el archivo
+			FileUtils.writeByteArrayToFile(new File(Main.mutanteBinDir + getPath(Main.targetclassPath)), instrumented);
+			
+			// Now we're ready to run our instrumented class and need to startup the
+			// runtime first:
+			final RuntimeData data = new RuntimeData();
+			runtime.startup(data);
+
+			// In this tutorial we use a special class loader to directly load the
+			// instrumented class definition from a byte[] instances.
+			//final MemoryClassLoader memoryClassLoader = new MemoryClassLoader();
+			//memoryClassLoader.addDefinition(Main.targetclassPath, instrumented);
+			//memoryClassLoader.addDefinition(Main.testclassPath, IOUtils.toByteArray(loader.getResourceAsStream(getPath(Main.testclassPath))));
+			
 			CustomListener listener = new CustomListener(null);
 			junit.addListener(listener);
-			Class<?> classTest = loader.loadClass(pathTest);
+			Class<?> classTest = loader.loadClass(Main.testclassPath);
 			junit.run(classTest);
+			
+			// At the end of test execution we collect execution data and shutdown
+			// the runtime:
+			final ExecutionDataStore executionData = new ExecutionDataStore();
+			final SessionInfoStore sessionInfos = new SessionInfoStore();
+			data.collect(executionData, sessionInfos, false);
+			runtime.shutdown();
+			
+			// Together with the original class definition we can calculate coverage
+			// information:
+			final CoverageBuilder coverageBuilder = new CoverageBuilder();
+			final Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
+			analyzer.analyzeClass(IOUtils.toByteArray(claseOriginal), Main.targetclassPath);
+			
+			for (final IClassCoverage cc : coverageBuilder.getClasses()) {
+				System.out.println("Coverage of class " + cc.getName());
+
+				for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
+					if(lineaCubierta(cc.getLine(i).getStatus())){
+						System.out.println("Linea cubierta: " + i);
+					}
+				}
+			}
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -70,5 +140,14 @@ public class TestearMutantes {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private boolean lineaCubierta(int status){
+		return status == ICounter.FULLY_COVERED || status == ICounter.PARTLY_COVERED;
+	}
+	
+	private String getPath(String target){
+		String ret = target.replace('.', File.separatorChar) + ".class";
+		return ret;		
 	}
 }

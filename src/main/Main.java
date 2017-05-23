@@ -20,7 +20,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 
 public class Main {
 	
-	public static String pathCompile,testclassPath,mutantesRoot,mutanteBinDir,pathTestSource,pathFuncSource;
+	public static String pathCompile,testclassPath,mutantesRoot,mutanteBinDir,pathTestSource,pathFuncSource,targetclassPath;
 	public static int mutantesTotales,mutantesPass;
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		
@@ -30,6 +30,7 @@ public class Main {
 		pathTestSource = "origen"+ File.separator +"test"+ File.separator +"MutarTest.java";
 		pathFuncSource = "origen"+ File.separator +"funcion"+ File.separator +"Funcion.java";
 		testclassPath = "test.MutarTest";
+		targetclassPath = "funcion.Funcion";
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
 		File log = new File("Log.txt");
@@ -66,10 +67,10 @@ public class Main {
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
-		mut.runTest();
-		//mut.registrarTestPorMutante(Main.testclassPath,"funcion.Funcion");
+		//mut.runTest();
+		mut.registrarTestPorMutante(Main.testclassPath,"funcion.Funcion");
 		
-		Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
+		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}
 
 }

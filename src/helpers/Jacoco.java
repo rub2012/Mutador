@@ -42,7 +42,7 @@ public final class Jacoco {
 		}
 
 	}
-
+	
 	/**
 	 * A class loader that loads classes from in-memory data.
 	 */
