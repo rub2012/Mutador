@@ -66,11 +66,13 @@ public class TestearMutantes {
 
 			// The Instrumenter creates a modified version of our test target class
 			// that contains additional probes for execution data recording:
-			InputStream claseOriginal = loader.getResourceAsStream(getPath(Main.targetclassPath));
-			final Instrumenter instr = new Instrumenter(runtime);
-			final byte[] instrumented = instr.instrument(claseOriginal, Main.targetclassPath);
 			
-			//sobrescribo el archivo
+			FileUtils.copyFile(new File(Main.mutanteBinDir + getPath(Main.targetclassPath)),new File(Main.mutanteBinDir + getPath(Main.targetclassPath + 2)));			
+			
+			final Instrumenter instr = new Instrumenter(runtime);
+			final byte[] instrumented = instr.instrument(loader.getResourceAsStream(getPath(Main.targetclassPath + 2)), Main.targetclassPath);
+			
+			//sobrescribo la clase instrumentada para que luego la cargue el classloader
 			FileUtils.writeByteArrayToFile(new File(Main.mutanteBinDir + getPath(Main.targetclassPath)), instrumented);
 			
 			// Now we're ready to run our instrumented class and need to startup the
@@ -78,16 +80,12 @@ public class TestearMutantes {
 			final RuntimeData data = new RuntimeData();
 			runtime.startup(data);
 
-			// In this tutorial we use a special class loader to directly load the
-			// instrumented class definition from a byte[] instances.
-			//final MemoryClassLoader memoryClassLoader = new MemoryClassLoader();
-			//memoryClassLoader.addDefinition(Main.targetclassPath, instrumented);
-			//memoryClassLoader.addDefinition(Main.testclassPath, IOUtils.toByteArray(loader.getResourceAsStream(getPath(Main.testclassPath))));
-			
 			CustomListener listener = new CustomListener(null);
 			junit.addListener(listener);
 			Class<?> classTest = loader.loadClass(Main.testclassPath);
-			junit.run(classTest);
+			Result resultado = junit.run(classTest);
+			System.out.println("Fallas totales: " + resultado.getFailureCount());
+			
 			
 			// At the end of test execution we collect execution data and shutdown
 			// the runtime:
@@ -100,7 +98,7 @@ public class TestearMutantes {
 			// information:
 			final CoverageBuilder coverageBuilder = new CoverageBuilder();
 			final Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
-			analyzer.analyzeClass(IOUtils.toByteArray(claseOriginal), Main.targetclassPath);
+			analyzer.analyzeClass(loader.getResourceAsStream(getPath(Main.targetclassPath + 2)), Main.targetclassPath);
 			
 			for (final IClassCoverage cc : coverageBuilder.getClasses()) {
 				System.out.println("Coverage of class " + cc.getName());
