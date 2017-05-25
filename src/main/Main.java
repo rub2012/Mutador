@@ -1,7 +1,11 @@
 package main;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.runner.JUnitCore;
 
@@ -22,15 +26,17 @@ public class Main {
 	
 	public static String pathCompile,testclassPath,mutantesRoot,mutanteBinDir,pathTestSource,pathFuncSource,targetclassPath;
 	public static int mutantesTotales,mutantesPass;
+	public static HashMap<Integer,Integer> lineaMutante;
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		
 		mutantesRoot = "mutantes"+ File.separator +"source" + File.separator;
 		mutanteBinDir = "mutantes" + File.separator + "bin" + File.separator; // .class del test y mutante a testear
 		pathCompile = "funcion" + File.separator + "Funcion.java";
 		pathTestSource = "origen"+ File.separator +"test"+ File.separator +"MutarTest.java";
-		pathFuncSource = "origen"+ File.separator +"funcion"+ File.separator +"Funcion.java";
+		pathFuncSource = "origen"+ File.separator + pathCompile;
 		testclassPath = "test.MutarTest";
 		targetclassPath = "funcion.Funcion";
+		lineaMutante = new HashMap<Integer,Integer>();
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
 		File log = new File("Log.txt");
@@ -67,9 +73,9 @@ public class Main {
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
-		//mut.runTest();
-		mut.registrarTestPorMutante(Main.testclassPath,"funcion.Funcion");
-		
+		Map<String,HashSet<Integer>> lineasXmutante = mut.registrarLineasPorTest(Main.testclassPath,"funcion.Funcion");
+		Set<Integer> s = mut.runTest(lineaMutante, lineasXmutante); // Devuelve un set que contiene los mutantes que pasan todos los test
+		s.size();
 		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}
 

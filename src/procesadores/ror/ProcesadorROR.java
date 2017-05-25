@@ -31,6 +31,7 @@ public class ProcesadorROR {
 			if (rordistinto.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.NE);
 				launcher.prettyprint();
@@ -39,6 +40,7 @@ public class ProcesadorROR {
 			if (rorigual.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.EQ);
 				launcher.prettyprint();
@@ -47,6 +49,7 @@ public class ProcesadorROR {
 			if (rormayor.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GT);
 				launcher.prettyprint();
@@ -55,6 +58,7 @@ public class ProcesadorROR {
 			if (rormayorigual.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.GE);
 				launcher.prettyprint();
@@ -63,6 +67,7 @@ public class ProcesadorROR {
 			if (rormenor.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LT);
 				launcher.prettyprint();
@@ -71,6 +76,7 @@ public class ProcesadorROR {
 			if (rormenorigual.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.LE);
 				launcher.prettyprint();

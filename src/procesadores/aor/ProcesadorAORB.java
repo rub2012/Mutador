@@ -29,6 +29,7 @@ public class ProcesadorAORB {
 			if (aorbsuma.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.PLUS);
 				launcher.prettyprint();
@@ -37,15 +38,16 @@ public class ProcesadorAORB {
 			if (aorbresta.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MINUS);				
-				//System.out.println(elemento.getPosition().getLine());//linea
 				launcher.prettyprint();
 				elemento.setKind(aux);
 			}
 			if (aorbdivision.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.DIV);
 				launcher.prettyprint();
@@ -54,6 +56,7 @@ public class ProcesadorAORB {
 			if (aorbmultiplicacion.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MUL);
 				launcher.prettyprint();
@@ -62,6 +65,7 @@ public class ProcesadorAORB {
 			if (aorbmodulo.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.MOD);
 				launcher.prettyprint();

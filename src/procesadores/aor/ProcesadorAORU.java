@@ -28,6 +28,7 @@ public class ProcesadorAORU {
 			if (aorupostdec.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTDEC);
 				launcher.prettyprint();
@@ -36,6 +37,7 @@ public class ProcesadorAORU {
 			if (aorupostinc.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.POSTINC);
 				launcher.prettyprint();
@@ -44,6 +46,7 @@ public class ProcesadorAORU {
 			if (aorupredec.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREDEC);
 				launcher.prettyprint();
@@ -52,6 +55,7 @@ public class ProcesadorAORU {
 			if (aorupreinc.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(UnaryOperatorKind.PREINC);
 				launcher.prettyprint();

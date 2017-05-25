@@ -1,21 +1,25 @@
 package helpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunListener;
 
 public class CustomListener extends RunListener {
+
+	private List<String> metodos;
 	
-	private Class<?> clase;
-	
-	public CustomListener(Class<?> clase){
-		this.clase=clase;
-	}
+	public CustomListener(){
+		metodos = new ArrayList<String>();
+	}	
 	
 	@Override
-	public void testFinished(Description description){
-		System.out.println(description.getMethodName());
-		//description.createSuiteDescription(testClass)
-		//description.
+	public void testStarted(Description description){
+		metodos.add(description.getMethodName());
 	}
-
+	
+	public List<String> getMetodos(){
+		return metodos;
+	}
 }

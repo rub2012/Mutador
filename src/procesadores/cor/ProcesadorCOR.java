@@ -30,6 +30,7 @@ public class ProcesadorCOR {
 			if (cory.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITAND);
 				launcher.prettyprint();
@@ -38,6 +39,7 @@ public class ProcesadorCOR {
 			if (coryy.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.AND);
 				launcher.prettyprint();
@@ -46,6 +48,7 @@ public class ProcesadorCOR {
 			if (coro.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITOR);
 				launcher.prettyprint();
@@ -54,6 +57,7 @@ public class ProcesadorCOR {
 			if (coroo.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.OR);
 				launcher.prettyprint();
@@ -62,6 +66,7 @@ public class ProcesadorCOR {
 			if (corxor.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
 				path = Main.mutantesRoot+Main.mutantesTotales;
+				Main.lineaMutante.put(Main.mutantesTotales, elemento.getPosition().getLine());
 				launcher.setSourceOutputDirectory(path);
 				elemento.setKind(BinaryOperatorKind.BITXOR);
 				launcher.prettyprint();
