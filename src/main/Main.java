@@ -12,6 +12,7 @@ import org.junit.runner.JUnitCore;
 import helpers.CustomListener;
 import helpers.Helper;
 import helpers.TestearMutantes;
+import procesadores.abs.ProcesadorABS;
 import procesadores.aor.ProcesadorAORB;
 import procesadores.aor.ProcesadorAORU;
 import procesadores.cor.ProcesadorCOR;
@@ -69,6 +70,9 @@ public class Main {
 		auxiliaresB = Helper.getROR(elementosB);
 		ProcesadorROR ror = new ProcesadorROR(launcher,auxiliaresB);
 		ror.run();
+		
+		ProcesadorABS abs = new ProcesadorABS(launcher, elementosB);
+		abs.run();
 		
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
