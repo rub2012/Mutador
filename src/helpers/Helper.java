@@ -165,7 +165,7 @@ public class Helper {
 			f.mkdirs();			
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 			StandardJavaFileManager sjfm = compiler.getStandardFileManager(null, null, null);
-			String[] options = new String[] { "-classpath", "origen;" + System.getProperty("java.class.path") , "-d", currentPath };
+			String[] options = new String[] { "-classpath", "origen" + File.pathSeparator + System.getProperty("java.class.path") , "-d", currentPath };
 			File[] javaFiles = new File[] { new File(currentRelativePath.toAbsolutePath().toString() + File.separator + path) };
 			CompilationTask compilationTask = compiler.getTask(null, null, null, Arrays.asList(options), null,sjfm.getJavaFileObjects(javaFiles));
 			compilationTask.call();

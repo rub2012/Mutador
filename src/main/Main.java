@@ -75,7 +75,7 @@ public class Main {
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
 		Map<String,HashSet<Integer>> lineasXmutante = mut.registrarLineasPorTest(Main.testclassPath,"funcion.Funcion");
 		Set<Integer> s = mut.runTest(lineaMutante, lineasXmutante); // Devuelve un set que contiene los mutantes que pasan todos los test
-		s.size();
+		System.out.println(s.size());
 		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}
 
