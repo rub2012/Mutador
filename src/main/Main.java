@@ -21,8 +21,13 @@ import procesadores.uoi.ProcesadorUOI;
 import spoon.Launcher;
 import spoon.reflect.CtModel;
 import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtUnaryOperator;
+import spoon.reflect.code.CtVariableRead;
+import spoon.reflect.code.CtVariableWrite;
+import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtTypedElement;
+import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 public class Main {
@@ -48,12 +53,20 @@ public class Main {
 		launcher.addInputResource(pathFuncSource);
 		TypeFilter<CtBinaryOperator<?>> expresionB = new TypeFilter<CtBinaryOperator<?>>(CtBinaryOperator.class);
 		TypeFilter<CtUnaryOperator<?>> expresionU = new TypeFilter<CtUnaryOperator<?>>(CtUnaryOperator.class);
-		TypeFilter<CtTypedElement<?>> expresionUOI = new TypeFilter<CtTypedElement<?>>(CtTypedElement.class);
+		Filter<CtElement> expresionUOI = new Filter<CtElement>() {
+
+			@Override
+			public boolean matches(CtElement element) {
+				return element instanceof CtUnaryOperator ||
+						element instanceof CtVariableRead ||
+						element instanceof CtLiteral ;
+			}
+		};
 		launcher.run();
 		CtModel modelo = launcher.getModel();
 		List<CtBinaryOperator<?>> elementosB;
 		List<CtUnaryOperator<?>> elementosU;
-		List<CtTypedElement<?>> elementosUOI;
+		List<CtElement> elementosUOI;
 		List<CtBinaryOperator<?>> auxiliaresB;
 		List<CtUnaryOperator<?>> auxiliaresU;
 		elementosB = modelo.getElements(expresionB);
@@ -79,8 +92,8 @@ public class Main {
 		ProcesadorABS abs = new ProcesadorABS(launcher, elementosB);
 		abs.run();
 		
-		//ProcesadorUOI uoi = new ProcesadorUOI(launcher, elementosUOI);
-		//uoi.run();
+		ProcesadorUOI uoi = new ProcesadorUOI(launcher, elementosUOI);
+		uoi.run();
 		
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);

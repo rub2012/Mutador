@@ -190,19 +190,6 @@ public class Helper {
 	        directory.delete();
 	    }
 	}
-	
-//	public static void runTests(String pathCompiled){
-//		File file = new File(pathCompiled);
-//		//Helper.setInstancia(file,Main.classPath);
-//	    Result result = JUnitCore.runClasses(MutarTest.class);
-//	    if (result.getFailureCount() == 0){
-//	    	Main.mutantesPass++;
-//	    	registrarMutante(pathCompiled);
-//	    }
-////	    for (Failure failure : result.getFailures()){
-////	        System.out.println(failure.toString());
-////	    }
-//	}
 		
 	public static void registrarMutante(String path){
 		Writer output;
