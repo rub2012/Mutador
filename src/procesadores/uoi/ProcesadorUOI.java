@@ -34,11 +34,16 @@ public class ProcesadorUOI {
 				launcher.setSourceOutputDirectory(path);
 				CtCodeSnippetExpression<?> snippet = launcher.getFactory().Core().createCodeSnippetExpression();
 				snippet.setValue("-" + elemento);
-				elemento.replace(snippet);
+				try {
+					elemento.replace(snippet);
+					
+					launcher.prettyprint();
+					
+					elemento.replace(aux);
+				}catch (Exception e){
+					
+				}
 				
-				launcher.prettyprint();
-				
-				elemento.replace(aux);
 			}
 			if (uoibooleano.isToBeProcessed(elemento)){
 				Main.mutantesTotales++;
@@ -47,11 +52,15 @@ public class ProcesadorUOI {
 				launcher.setSourceOutputDirectory(path);
 				CtCodeSnippetExpression<?> snippet = launcher.getFactory().Core().createCodeSnippetExpression();
 				snippet.setValue("!" + elemento);
-				elemento.replace(snippet);
-				
-				launcher.prettyprint();
-				
-				elemento.replace(aux);
+				try {
+					elemento.replace(snippet);
+					
+					launcher.prettyprint();
+					
+					elemento.replace(aux);
+				}catch (Exception e){
+					
+				}
 			}
 		}
 		

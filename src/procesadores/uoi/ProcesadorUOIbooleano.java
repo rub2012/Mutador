@@ -8,8 +8,13 @@ public class ProcesadorUOIbooleano extends AbstractProcessor<CtElement>{
 	
 	@Override
 	public boolean isToBeProcessed(CtElement candidate){
-		Class<?> tipo = ((CtTypedElement<?>) candidate).getType().getActualClass();
-		return tipo == boolean.class;
+		try {
+			Class<?> tipo = ((CtTypedElement<?>) candidate).getType().getActualClass();
+			return tipo == boolean.class;
+		} catch (Exception e){
+			return false;
+		}
+		
 	}
 
 	@Override

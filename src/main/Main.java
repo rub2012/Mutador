@@ -17,10 +17,12 @@ import procesadores.aor.ProcesadorAORB;
 import procesadores.aor.ProcesadorAORU;
 import procesadores.cor.ProcesadorCOR;
 import procesadores.ror.ProcesadorROR;
+import procesadores.uoi.ProcesadorUOI;
 import spoon.Launcher;
 import spoon.reflect.CtModel;
 import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtUnaryOperator;
+import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 public class Main {
@@ -46,14 +48,17 @@ public class Main {
 		launcher.addInputResource(pathFuncSource);
 		TypeFilter<CtBinaryOperator<?>> expresionB = new TypeFilter<CtBinaryOperator<?>>(CtBinaryOperator.class);
 		TypeFilter<CtUnaryOperator<?>> expresionU = new TypeFilter<CtUnaryOperator<?>>(CtUnaryOperator.class);
+		TypeFilter<CtTypedElement<?>> expresionUOI = new TypeFilter<CtTypedElement<?>>(CtTypedElement.class);
 		launcher.run();
 		CtModel modelo = launcher.getModel();
 		List<CtBinaryOperator<?>> elementosB;
 		List<CtUnaryOperator<?>> elementosU;
+		List<CtTypedElement<?>> elementosUOI;
 		List<CtBinaryOperator<?>> auxiliaresB;
 		List<CtUnaryOperator<?>> auxiliaresU;
 		elementosB = modelo.getElements(expresionB);
 		elementosU = modelo.getElements(expresionU);
+		elementosUOI = modelo.getElements(expresionUOI);
 		//Filtro AOR binarios
 		auxiliaresB = Helper.getAORBinarios(elementosB);
 		ProcesadorAORB aorb = new ProcesadorAORB(launcher,auxiliaresB);
@@ -73,6 +78,9 @@ public class Main {
 		
 		ProcesadorABS abs = new ProcesadorABS(launcher, elementosB);
 		abs.run();
+		
+		//ProcesadorUOI uoi = new ProcesadorUOI(launcher, elementosUOI);
+		//uoi.run();
 		
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);

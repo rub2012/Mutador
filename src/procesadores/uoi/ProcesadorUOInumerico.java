@@ -16,8 +16,13 @@ public class ProcesadorUOInumerico extends AbstractProcessor<CtElement>{
 	
 	@Override
 	public boolean isToBeProcessed(CtElement candidate){
-		Class<?> tipo = ((CtTypedElement<?>) candidate).getType().getActualClass();
-		return tipo == int.class || tipo == float.class || tipo == double.class || tipo == long.class || tipo == byte.class || tipo == short.class;
+		try {
+			Class<?> tipo = ((CtTypedElement<?>) candidate).getType().getActualClass();
+			return tipo == int.class || tipo == float.class || tipo == double.class || tipo == long.class || tipo == byte.class || tipo == short.class;
+		
+		} catch (Exception e){
+			return false;
+		}
 	}
 
 	@Override
