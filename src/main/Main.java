@@ -1,12 +1,17 @@
 package main;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.lf5.util.ResourceUtils;
 import org.junit.runner.JUnitCore;
 
 import helpers.CustomListener;
@@ -39,12 +44,19 @@ public class Main {
 		
 		mutantesRoot = "mutantes"+ File.separator +"source" + File.separator;
 		mutanteBinDir = "mutantes" + File.separator + "bin" + File.separator; // .class del test y mutante a testear
-		pathCompile = "funcion" + File.separator + "Funcion.java";
-		pathTestSource = "origen"+ File.separator +"test"+ File.separator +"MutarTest.java";
+		pathCompile = "Funcion.java";
+		pathTestSource = "origen"+ File.separator +"MutarTest.java";
 		pathFuncSource = "origen"+ File.separator + pathCompile;
-		testclassPath = "test.MutarTest";
-		targetclassPath = "funcion.Funcion";
+		testclassPath = "MutarTest";
+		targetclassPath = "Funcion";
 		lineaMutante = new HashMap<Integer,Integer>();
+		File ss1 = new File("origen");
+		List<File> af = new ArrayList<File>();
+		List<File> ass = Helper.listarFiles(ss1,af);
+		String ff = ass.get(0).toString().replace("origen"+ File.separator , "").replace(File.separator, ".").replace(".java", "");
+		
+		//jj[0].toURI()
+		//ResourceUtils.getRelat;
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
 		File log = new File("Log.txt");

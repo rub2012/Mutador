@@ -190,6 +190,21 @@ public class Helper {
 	        directory.delete();
 	    }
 	}
+	
+	public static List<File> listarFiles(File directory,List<File> archivos){
+		if(directory.exists()){
+			for (File f : directory.listFiles()){
+				if(f.isDirectory()) {
+                	listarFiles(f,archivos);
+                }
+                else {
+                	archivos.add(f);
+                }
+			}
+	        return archivos;	       
+	    }
+		return null;
+	}
 		
 	public static void registrarMutante(String path){
 		Writer output;
