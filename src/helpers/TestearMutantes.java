@@ -2,9 +2,6 @@ package helpers;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,7 +14,6 @@ import java.util.Set;
 import main.Main;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
@@ -58,7 +54,7 @@ public class TestearMutantes {
 	}
 	
 	
-	public Map<String,HashSet<Integer>> registrarLineasPorTest(String pathTest, String pathClase) {
+	public Map<String,HashSet<Integer>> registrarLineasPorTest() {
 		Map<String,HashSet<Integer>> mapa = new HashMap<String,HashSet<Integer>>();
 		try {
 			List<String> metodos =  getMetodos();
@@ -126,7 +122,7 @@ public class TestearMutantes {
 	public Set<Integer> runTest(HashMap<Integer,Integer> lineaXmutante,Map<String,HashSet<Integer>> lineasXtest ){
 		Set<Integer> mutantesNoDetectados = new HashSet<Integer>();
 		for(int i : lineaXmutante.keySet()){
-			Helper.compilar(Main.mutantesRoot + i + File.separator + Main.pathCompile, Main.mutanteBinDir);
+			Helper.compilar(Main.mutantesRoot + i + File.separator + Main.pathFuncSource, Main.mutanteBinDir);
 			int linea = lineaXmutante.get(i);//numero de linea mutante del mutante que estoy usando
 			Set<String> metodos = new HashSet<String>();
 			//Recorro para cada metodo de test fijandome si la linea mutada esta en el set del metodo del test

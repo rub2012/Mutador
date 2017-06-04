@@ -1,20 +1,12 @@
 package main;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.net.URI;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.lf5.util.ResourceUtils;
-import org.junit.runner.JUnitCore;
-
-import helpers.CustomListener;
 import helpers.Helper;
 import helpers.TestearMutantes;
 import procesadores.abs.ProcesadorABS;
@@ -29,34 +21,24 @@ import spoon.reflect.code.CtBinaryOperator;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtUnaryOperator;
 import spoon.reflect.code.CtVariableRead;
-import spoon.reflect.code.CtVariableWrite;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.TypeFilter;
 
 public class Main {
 	
-	public static String pathCompile,testclassPath,mutantesRoot,mutanteBinDir,pathTestSource,pathFuncSource,targetclassPath;
+	public static String testclassPath,mutantesRoot,mutanteBinDir,pathTestSource,pathFuncSource,targetclassPath;
 	public static int mutantesTotales,mutantesPass;
 	public static HashMap<Integer,Integer> lineaMutante;
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		
 		mutantesRoot = "mutantes"+ File.separator +"source" + File.separator;
 		mutanteBinDir = "mutantes" + File.separator + "bin" + File.separator; // .class del test y mutante a testear
-		pathCompile = "Funcion.java";
-		pathTestSource = "origen"+ File.separator +"MutarTest.java";
-		pathFuncSource = "origen"+ File.separator + pathCompile;
-		testclassPath = "MutarTest";
-		targetclassPath = "Funcion";
+		pathFuncSource = args[0]; // Fuente de la clase objetivo *.java para compilar
+		pathTestSource = args[1]; // Fuente del test *.java para compilar
+		targetclassPath = pathFuncSource.replace(File.separator, ".").replace(".java", ""); // class name loader de la clase objetivo
+		testclassPath = pathTestSource.replace(File.separator, ".").replace(".java", ""); // class name loader del test		
 		lineaMutante = new HashMap<Integer,Integer>();
-		File ss1 = new File("origen");
-		List<File> af = new ArrayList<File>();
-		List<File> ass = Helper.listarFiles(ss1,af);
-		String ff = ass.get(0).toString().replace("origen"+ File.separator , "").replace(File.separator, ".").replace(".java", "");
-		
-		//jj[0].toURI()
-		//ResourceUtils.getRelat;
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
 		File log = new File("Log.txt");
@@ -110,7 +92,7 @@ public class Main {
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
-		Map<String,HashSet<Integer>> lineasXmutante = mut.registrarLineasPorTest(Main.testclassPath,"funcion.Funcion");
+		Map<String,HashSet<Integer>> lineasXmutante = mut.registrarLineasPorTest();
 		Set<Integer> s = mut.runTest(lineaMutante, lineasXmutante); // Devuelve un set que contiene los mutantes que pasan todos los test
 		System.out.println(s.size());
 		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
