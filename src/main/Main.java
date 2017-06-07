@@ -94,7 +94,12 @@ public class Main {
 		TestearMutantes mut = new TestearMutantes(Main.mutanteBinDir);
 		Map<String,HashSet<Integer>> lineasXmutante = mut.registrarLineasPorTest();
 		Set<Integer> s = mut.runTest(lineaMutante, lineasXmutante); // Devuelve un set que contiene los mutantes que pasan todos los test
-		System.out.println(s.size());
+		System.out.println(s.size() +" de " + mutantesTotales + " Mutantes pasaron todos los test.");
+		System.out.println();
+		for (Integer mutante : s) {
+			System.out.println("El mutante ubicado en: '~"+ File.separator + mutantesRoot + mutante + "' pasa todos los test y su número de linea mutada es: " + lineaMutante.get(mutante));
+		}
+		
 		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
 	}
 
