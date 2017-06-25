@@ -41,8 +41,6 @@ public class Main {
 		lineaMutante = new HashMap<Integer,Integer>();
 		File mutantes = new File(mutantesRoot);
 		Helper.limpiarDirectorio(mutantes);
-		File log = new File("Log.txt");
-		Helper.limpiarDirectorio(log);
 		Launcher launcher = new Launcher();
 		launcher.addInputResource(pathFuncSource);
 		TypeFilter<CtBinaryOperator<?>> expresionB = new TypeFilter<CtBinaryOperator<?>>(CtBinaryOperator.class);
@@ -87,7 +85,7 @@ public class Main {
 		abs.run();
 		
 		ProcesadorUOI uoi = new ProcesadorUOI(launcher, elementosUOI);
-		uoi.run();
+		//uoi.run();
 		
 		Helper.compilar(Main.pathFuncSource, Main.mutanteBinDir);
 		Helper.compilar(Main.pathTestSource, Main.mutanteBinDir);
@@ -99,8 +97,7 @@ public class Main {
 		for (Integer mutante : s) {
 			System.out.println("El mutante ubicado en: '~"+ File.separator + mutantesRoot + mutante + "' pasa todos los test y su número de linea mutada es: " + lineaMutante.get(mutante));
 		}
-		
-		//Helper.registrarMutante("Mutantes totales procesados: " + mutantesTotales + " - Mutantes que pasan todos los test: " + mutantesPass );
+
 	}
 
 }
